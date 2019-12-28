@@ -15,15 +15,15 @@ struct Book {
 void add(unsigned int n, Book st_arr[]) {
 
     for (int i = 0; i < n; i++) {
-        cout << "Ââåäèòå ó÷. íîìåğ " << i+1 << " êíèãè: ";
+        cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ ÑƒÑ‡. Ğ½Ğ¾Ğ¼ĞµÑ€ " << i+1 << " ĞºĞ½Ğ¸Ğ³Ğ¸: ";
         cin >> st_arr[i].regnumber;
-        cout << "Ââåäèòå øèôğ " << i+1 << " êíèãè: ";
+        cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ ÑˆĞ¸Ñ„Ñ€ " << i+1 << " ĞºĞ½Ğ¸Ğ³Ğ¸: ";
         cin >> st_arr[i].cipher;
-        cout << "Ââåäèòå àâòîğîâ " << i+1 << " êíèãè: ";
+        cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ°Ğ²Ñ‚Ğ¾Ñ€Ğ¾Ğ² " << i+1 << " ĞºĞ½Ğ¸Ğ³Ğ¸: ";
         cin >> st_arr[i].autors;
-        cout << "Ââåäèòå íàçâàíèå " << i+1 << " êíèãè: ";
+        cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ½Ğ°Ğ·Ğ²Ğ°Ğ½Ğ¸Ğµ " << i+1 << " ĞºĞ½Ğ¸Ğ³Ğ¸: ";
         cin >> st_arr[i].bookname;
-        cout << "Ââåäèòå ãîä èçäàíèÿ " << i+1 << " êíèãè: ";
+        cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ³Ğ¾Ğ´ Ğ¸Ğ·Ğ´Ğ°Ğ½Ğ¸Ñ " << i+1 << " ĞºĞ½Ğ¸Ğ³Ğ¸: ";
         cin >> st_arr[i].year;
         cout << endl;
     }
@@ -42,25 +42,26 @@ void structsort (unsigned int n, Book st_arr[]) {
     }
 }
 
-unsigned int binsearch (unsigned int n, Book st_arr[], unsigned int item) {
+void binsearch (unsigned int n, Book st_arr[], unsigned int item) {
 unsigned int low = 0, mid, high, guess;
 high = n - 1;
 
     while (low <= high) {
         mid = (low + high) / 2;
         guess = st_arr[mid].regnumber;
-        if (low == high && guess != item) { // Ïğîâåğêà íà íåïğàâèëüíûé íîìåğ çäåñü, èáî åñëè ïğîâåğÿòü ïğîñòûì ïåğåáîğîì â îñíîâíîé ôóíêöèè, òî òåğÿåòñÿ ñìûñë áèíàğíîãî ïîèñêà.
-            cout << "Òàêîãî ğåã. íîìåğà íåò â áàçå!";
+
+        if (guess == item) {
+            cout << "Ğ’Ğ°ÑˆĞ° ĞºĞ½Ğ¸Ğ³Ğ° (Ğ¿Ğ¾ÑĞ»Ğµ ÑĞ¾Ñ€Ñ‚Ğ¸Ñ€Ğ¾Ğ²ĞºĞ¸) Ğ¿Ğ¾Ğ´ Ğ½Ğ¾Ğ¼ĞµÑ€Ğ¾Ğ¼ " << mid + 1;
             exit(0);
         }
-        if (guess == item)
-            return (mid + 1);
-
         if (guess > item)
             high = mid - 1;
         else
             low = mid + 1;
     }
+
+    cout << "Ğ¢Ğ°ĞºĞ¾Ğ³Ğ¾ Ñ€ĞµĞ³. Ğ½Ğ¾Ğ¼ĞµÑ€Ğ° Ğ½ĞµÑ‚ Ğ² Ğ±Ğ°Ğ·Ğµ!";
+
 }
 
 int main () {
@@ -68,20 +69,21 @@ int main () {
 
     unsigned int n, item;
 
-    cout << "Ââåäèòå êîëè÷åñòâî êíèã: ";
+    cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ ĞºĞ¾Ğ»Ğ¸Ñ‡ĞµÑÑ‚Ğ²Ğ¾ ĞºĞ½Ğ¸Ğ³: ";
     cin >> n;
 
     Book *st_arr = new Book[n];
 
     add(n, st_arr);
     structsort(n, st_arr);
-    cout << "Ââåäèòå èñêîìûé ğåã. íîìåğ: ";
+    cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ¸ÑĞºĞ¾Ğ¼Ñ‹Ğ¹ Ñ€ĞµĞ³. Ğ½Ğ¾Ğ¼ĞµÑ€: ";
     cin >> item;
 
-    cout << "Âàøà êíèãà ïîä íîìåğîì " << binsearch (n, st_arr, item) << endl;
+    binsearch (n, st_arr, item);
 
     delete [] st_arr;
 
 
 return 0;
 }
+
